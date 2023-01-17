@@ -1,0 +1,36 @@
+<script>
+    function next () {
+      // (A) GET SELECTED VALUE
+      var selected = document.querySelector("#stepA input[type=radio]:checked").value;
+     
+      // (B) LOAD FORM VIA AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "b-ajax.html");
+      xhr.onload = function () {
+        // HIDE STEP A
+        document.getElementById("stepA").style.display = "none";
+     
+        // SET LOADED HTML AND SELECTED
+        document.getElementById("stepB").innerHTML = this.response;
+        document.getElementById("radsel").value = selected;
+     
+        // SHOW STEP B
+        document.getElementById("stepB").style.display = "block";
+      };
+      xhr.send();
+    }
+    </script>
+    
+    <!-- (A) SELECT ITEM -->
+    <div id="stepA">
+      <label>
+        <input type="radio" name="radopt" value="Foo" checked/> Foo
+      </label>
+      <label>
+        <input type="radio" name="radopt" value="Bar"/> Bar
+      </label>
+      <input type="button" value="Next" onclick="next()"/>
+    </div>
+     
+    <!-- (B) FORM -->
+    <div id="stepB" style="display:none"></div>

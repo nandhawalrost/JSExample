@@ -1,0 +1,17 @@
+<script>
+    function go () {
+      // (A) VARIABLES TO PASS
+      var first = "Foo Bar",
+          second = ["Hello", "World"];
+     
+      // (B) OPEN NEW WINDOW
+      // JUST PASS VARIABLES OVER TO NEW WINDOW
+      var newwin = window.open("b-window.html");
+      newwin.onload = () => {
+        newwin.first = first;
+        newwin.second = second;
+      };
+    }
+  </script>
+    
+  <input type="button" value="GO" onclick="go()"/>

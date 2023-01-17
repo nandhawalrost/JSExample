@@ -1,0 +1,20 @@
+<script>
+    function get () {
+      // (A) GET BACK PASS VARS
+      var passvars = document.cookie
+        .split("; ")
+        .find(row => row.startsWith("pass"))
+        .substring(5);
+     
+      // (B) PARSE BACK
+      var params = new URLSearchParams(passvars),
+          first = params.get("first"),
+          second = JSON.parse(params.get("second"));
+     
+      // (C) IT WORKS!
+      alert(first);  // Foo Bar
+      alert(second); // ["Hello", "World"]
+    }
+</script>
+    
+<input type="button" value="Get" onclick="get()"/>
