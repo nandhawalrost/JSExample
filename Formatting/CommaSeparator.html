@@ -1,0 +1,88 @@
+<style>
+   div {
+      margin-bottom:1.5rem;
+   }
+   label {
+      display:block;
+   }
+   input {
+      border:1px solid #999;
+      border-radius:3px;
+      color:#444;
+      font-size:1.3em;
+      padding:6px;
+      text-align:right;
+   }
+   [type=number]::-webkit-inner-spin-button,
+   [type=number]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;}
+</style>
+<div>
+   <label for=number>number</label>
+   <input type=number id=number>
+ </div>
+ 
+ <div>
+   <!-- this sucks because it does not pop a numeric keypad on mobile -->
+   <label for=text>text (en-CA)</label>
+   <input type=text id=text step=1.0>
+ </div>
+ 
+ <div>
+   <!-- this sucks because it does not pop a numeric keypad on mobile -->
+   <label for=text>text (de-DE)</label>
+   <input type=text id=textDe step=1.0>
+ </div>
+
+ <script>
+   "use strict";
+
+function NumericInput(inp, locale) {
+  var numericKeys = '0123456789';
+
+  // restricts input to numeric keys 0-9
+  inp.addEventListener('keypress', function(e) {
+    var event = e || window.event;
+    var target = event.target;
+
+    if (event.charCode == 0) {
+      return;
+    }
+
+    if (-1 == numericKeys.indexOf(event.key)) {
+      // Could notify the user that 0-9 is only acceptable input.
+      event.preventDefault();
+      return;
+    }
+  });
+
+  // add the thousands separator when the user blurs
+  inp.addEventListener('keyup', function(e) {
+    var event = e || window.event;
+    var target = event.target;
+
+    var tmp = target.value.replace(/,/g, '');
+    var val = Number(tmp).toLocaleString(locale);
+
+    if (tmp == '') {
+      target.value = '';
+    } else {
+      target.value = val;
+    }
+  });
+
+  // strip the thousands separator when the user puts the input in focus.
+  inp.addEventListener('focus', function(e) {
+    var event = e || window.event;
+    var target = event.target;
+    var val = target.value.replace(/[,.]/g, '');
+
+    target.value = val;
+  });
+}
+
+var number = new NumericInput(document.getElementById('number', 'en-CA'));
+var text = new NumericInput(document.getElementById('text', 'en-CA'));
+var textDe = new NumericInput(document.getElementById('textDe', 'de-DE'));
+ </script>
