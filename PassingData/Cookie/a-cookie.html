@@ -1,0 +1,20 @@
+<script>
+    function store () {
+      // (A) VARIABLES TO PASS
+      var first = "Foo Bar",
+          second = ["Hello", "World"];
+     
+      // (B) URL PARAMETERS + STORE INTO COOKIE
+      // * WORKS, BUT NOT RECOMMENDED
+      var params = new URLSearchParams();
+      params.append("first", first);
+      params.append("second", JSON.stringify(second));
+      document.cookie = "pass=" + params.toString();
+     
+      // (C) REDIRECT
+      location.href = "b-cookie.html";
+      // window.open("b-cookie.html");
+    }
+</script>
+    
+<input type="button" value="Go" onclick="store()"/>
