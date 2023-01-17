@@ -1,12 +1,31 @@
-<script>
-    var army=["Marcos", "DeltaForce", "Seals", "SWAT", "HeadHunters"]; 
-     
-    if(army.indexOf("Marcos") !== -1) 
-    { 
-        alert("Yes, the value exists!") 
-    } 
-    else 
-    { 
-        alert("No, the value is absent.") 
-    } 
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Get URL i</title>
+</head>
+<body>
+   <img src="https://images.unsplash.com/photo-1606115915090-be18fea23ec7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80" id="myImg">
+   <script>
+      function toDataURL(src, callback){
+         var image = new Image();
+         image.crossOrigin = 'Anonymous';
+         image.onload = function(){
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            canvas.height = this.naturalHeight;
+            canvas.width = this.naturalWidth;
+            context.drawImage(this, 0, 0);
+            var dataURL = canvas.toDataURL('image/jpeg');
+            callback(dataURL);
+         };
+         image.src = src;
+      }
+      toDataURL('https://images.unsplash.com/photo-1606115915090-be18fea23ec7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80', function(dataURL){
+         alert(dataURL);
+      });
+
+   </script>
+</body>
