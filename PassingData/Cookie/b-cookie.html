@@ -15,6 +15,11 @@
       alert(first);  // Foo Bar
       alert(second); // ["Hello", "World"]
     }
+    
+    function remove(){
+      document.cookie = 'pass=';
+    }
 </script>
     
 <input type="button" value="Get" onclick="get()"/>
+<input type="button" value="Remove" onclick="remove()"/>
