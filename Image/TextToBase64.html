@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Get URL i</title>
+</head>
+<body>
+   <style>
+      canvas{
+         border: 1px black solid;
+         background-color: white;
+      }
+      #textCanvas{
+         display:none;
+      }
+    </style>
+   <canvas id='textCanvas' height=30></canvas>
+   <img id='image'>
+   <script>
+      var tCtx = document.getElementById('textCanvas').getContext('2d');
+      var imageElem = document.getElementById('image');
+
+      var bold_number = ['𝟬','𝟭','𝟮','𝟯','𝟰','𝟱','𝟲','𝟳','𝟴','𝟵'];
+      var nominal_masuk = '100000';
+      var replacementCharacter = bold_number[nominal_masuk[0]];
+      if(nominal_masuk.length > 0){
+         var modifiedString = replacementCharacter + nominal_masuk.slice(1);
+      nominal_masuk = modifiedString;
+      }
+
+      tCtx.canvas.width = 488;
+      tCtx.font = "normal 30px arial";
+      tCtx.fillStyle = "white";
+      tCtx.fillRect(0, 0, tCtx.canvas.width, tCtx.canvas.height);
+      tCtx.fillStyle = "black";
+      tCtx.fillText('Nominal  : Rp. '+nominal_masuk, 0, 24);
+      imageElem.src = tCtx.canvas.toDataURL();
+      console.log(imageElem.src);
+   </script>
+</body>
